@@ -25,3 +25,14 @@
 * 更新一篇博客       /api/blog/update        params   id
 * 删除一篇博客      /api/blog/del            params    id
 * 登录             /api/user/login         params     username  password
+
+* http请求概述
+    - DNS解析,建立TCP连接,发送http请求
+    - server 接受到 http请求 处理并返回
+    - 客户端接受到返回数据,处理数据。
+
+
+ * node.js处理http请求
+    - get 请求和querystring
+    - post 请求和postdata
+    - 路由   
