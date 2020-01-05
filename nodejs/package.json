@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "cross-env": "^6.0.3"
+  },
+  "dependencies": {
+    "mysql": "^2.17.1"
   }
 }
