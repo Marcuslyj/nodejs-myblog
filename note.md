@@ -16,7 +16,7 @@
 
 * 数据如何存储
     - blog = { id,title,content,createtime,author}
-    - user = { id, username,password,realname}
+    - user = { id, username <varchar(20)>,password<varchar(20)> realname<varchar(10)>}
 * 如何与前端对接 即接口设计
 
 * 获取博客列表       /api/blog/list          params author
@@ -36,3 +36,40 @@
     - get 请求和querystring
     - post 请求和postdata
     - 路由   
+
+
+  # 操作表
+  * 增 删  改 查
+  * 使用 sql语句 
+  
+   ```
+use myblog;
+ show tables;
+ insert into users(username,`password`,realname) values('zhangsan','123','张三');
+ insert into users(username,`password`,realname) values('lisi','123','李四');
+ select * from users; 
+select id,username from users;
+select * from users where username='zhangsan'and `password`='123';
+ select * from users where username = 'zhangsan' or `password` = '123';
+ select * from users where password like '%1%';
+select * from users where password like '%1%' order by id desc;
+
+SET SQL_SAFE_UPDATES=0;
+update users set realname='李四2' where username='lisi'
+delete from users where username ='lisi';
+update users set state ='0' where username = 'lisi';
+select * from users where state = '1';
+
+insert into blogs(title,content,createtime,author) values('标题A','内容A',2342343,'张三');
+insert into blogs(title,content,createtime,author) values('标题B','内容B',2342343,'李四');
+select * from blogs;
+select * from users;
+select * from blogs;
+select version();
+
+
+
+
+
+
+   ```
