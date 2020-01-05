@@ -42,7 +42,7 @@
   * 增 删  改 查
   * 使用 sql语句 
   
-   ```
+```
 use myblog;
  show tables;
  insert into users(username,`password`,realname) values('zhangsan','123','张三');
@@ -66,10 +66,11 @@ select * from blogs;
 select * from users;
 select * from blogs;
 select version();
+```
 
+* bin www.js 启动http服务 并监听 端口
+* app.js 处理业务共同逻辑 比如相同的响应头  并处理路由
 
+* router.js 处理路由 并 引用 controller 处理业务比如查看数据库
 
-
-
-
-   ```
+* exec 返回 promise   则 controller 返回也是 promise router -> app.js

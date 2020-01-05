@@ -32,7 +32,6 @@ const newBlog = (blogData = {}) => {
 const updateBlog = (id, blogData = {}) => {
   const { title, content } = blogData;
   // const createtime = Date.now();
-  console.log(id,title,content)
   const sql = `update blogs set title='${title}',content='${content}' where id=${id}`
 
   return exec(sql).then(updateData=>{
@@ -43,8 +42,16 @@ const updateBlog = (id, blogData = {}) => {
     }
   })
 };
-const delBlog = (id, blogData = {}) => {
-  return true;
+const delBlog = (id, author) => {
+  console.log('delBlog:',id,author)
+  const sql = `delete from blogs where id=${id} and author='${author}'`
+  return exec(sql).then(delData=>{
+    if(delData.affectedRows>0){
+      return true
+    }else{
+      return false
+    }
+  })
 };
 module.exports = {
   getList,
