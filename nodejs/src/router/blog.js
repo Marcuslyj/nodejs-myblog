@@ -17,21 +17,37 @@ const handleBlogRouter = (req,res)=>{
     }
     if(method === 'GET'&&path==='/api/blog/detail'){
         
-        const data = getDetail(id)
-        return new SuccessModel(data)
+        // const data = getDetail(id)
+        // return new SuccessModel(data)
+        const result = getDetail(id)
+        return result.then(data=>{
+            return new SuccessModel(data)
+        })
     }
     if(method === 'POST'&&path === '/api/blog/new'){
         const blogData = req.body
-        const data = newBlog(blogData)
-        return new SuccessModel(data)
+        // const data = newBlog(blogData)
+        // return new SuccessModel(data)
+        blogData.author = 'zhangsan'
+        const result = newBlog(blogData)
+        return result.then(data=>{
+            return new SuccessModel(data)
+        })
     }
     if(method === 'POST'&& path === '/api/blog/update'){
-        const result = updateBlog(id,req.body)
-        if(result){
+        const result = updateBlog(req.body.id,req.body)
+        // if(result){
+        //     return new SuccessModel()
+        // }else {
+        //     return new ErrorModel('更新blog错误')
+        // }
+       return result.then(val=>{
+            if(val){
             return new SuccessModel()
         }else {
             return new ErrorModel('更新blog错误')
         }
+        })
     }
     if(method === 'POST'&&path === '/api/blog/del'){
         const result = delBlog(id,req.body)
