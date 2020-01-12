@@ -74,3 +74,10 @@ select version();
 * router.js 处理路由 并 引用 controller 处理业务比如查看数据库
 
 * exec 返回 promise   则 controller 返回也是 promise router -> app.js
+
+# cookie
+* 存储在浏览器的一段字符串（最大5kb）
+* 跨域不共享
+* 每次发送http请求，会将请求域的 cookie一起发送给sever
+* server可以修改cookie 并返回给浏览器。
+* 浏览器中也可以通过js修改 cookie（有限制 http only）

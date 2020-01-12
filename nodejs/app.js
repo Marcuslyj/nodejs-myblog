@@ -34,7 +34,17 @@ const serverHandle = (req, res) => {
   const url = req.url;
   req.path = url.split("?")[0];
   req.query = querystring.parse(url.split("?")[1]);
-
+  req.cookie = {}
+ const cookieStr = req.headers.cookie || ''
+ cookieStr.split(';').forEach(item => {
+   if(!item){
+     return
+   }
+   const arr = item.split('=')
+   const key = arr[0].trim()
+   const val = arr[1].trim()
+   req.cookie[key] = val
+ })
   getPostData(req).then(postData => {
     // 接受post的数据并挂载到 req.body上
     req.body = postData;
