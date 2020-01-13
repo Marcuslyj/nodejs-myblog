@@ -81,3 +81,10 @@ select version();
 * 每次发送http请求，会将请求域的 cookie一起发送给sever
 * server可以修改cookie 并返回给浏览器。
 * 浏览器中也可以通过js修改 cookie（有限制 http only）
+
+* session 
+* session 直接是js变量 放在 node.js的进程内存中
+* 进程内存有限,访问量过大,内存暴增
+* 正式线上是多进程,多进程之间内存无法共享
+
+* redis
