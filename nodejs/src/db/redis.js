@@ -27,6 +27,7 @@ function get (key){
             }
         })
     })
+    return promise
 }
 
 module.exports = {
