@@ -95,3 +95,8 @@ select version();
     - 自定义日志（自定义事件 错误记录）
 
     - 日志拆分 内容分析
+
+* 安全
+    - sql 注入 escape
+    - xss攻击  xss库
+    - 密码加密
