@@ -20,8 +20,15 @@ const handleBlogRouter = (req, res) => {
   const url = req.url;
   const path = url.split("?")[0];
   if (method === "GET" && path === "/api/blog/list") {
-    const author = req.query.author || "";
-    const keyword = req.query.keyword || "";
+    let author = req.query.author || "";
+    let keyword = req.query.keyword || "";
+    if(req.query.isadmin){
+      const loginCheckResult = loginCheck(req)
+      if(loginCheckResult){
+        return loginCheckResult
+      }
+      author = req.session.username
+    }
     const result = getList(author, keyword);
     return result
       .then(listData => {
@@ -46,7 +53,7 @@ const handleBlogRouter = (req, res) => {
     const loginCheckResult = loginCheck(req)
     if(loginCheckResult){
       // 尚未登录
-      return loginCheck
+      return loginCheckResult
     }
     blogData.author = req.session.username
     const result = newBlog(blogData);
@@ -58,9 +65,9 @@ const handleBlogRouter = (req, res) => {
     const loginCheckResult = loginCheck(req)
     if(loginCheckResult){
       // 尚未登录
-      return loginCheck
+      return loginCheckResult
     }
-    const result = updateBlog(req.body.id, req.body);
+    const result = updateBlog(req.query.id, req.body);
     // if(result){
     //     return new SuccessModel()
     // }else {
@@ -78,7 +85,7 @@ const handleBlogRouter = (req, res) => {
     const loginCheckResult = loginCheck(req)
     if(loginCheckResult){
       // 尚未登录
-      return loginCheck
+      return loginCheckResult
     }
     const blogData = req.body;
     blogData.author = req.session.username

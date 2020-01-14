@@ -1,6 +1,6 @@
 const {login} = require('../controller/user')
 const {ErrorModel,SuccessModel} = require('../model/resModel')
-
+const {get,set} = require('../db/redis')
 
 
 const handleUserRouter = (req,res)=>{
@@ -11,13 +11,14 @@ const handleUserRouter = (req,res)=>{
        const {username,password} =req.body
        const result = login(username,password)
     return result.then(data=>{
-        if(data.username){
+        console.log('-----login:',data)
+        if(data.username||data.id){
             req.session.username = data.username
             req.session.realName = data.realName
+            set(req.sessionId,req.session)
             return new SuccessModel()
-        }else{
-            return new ErrorModel('登录失败')
         }
+        return new ErrorModel('登录失败')
     })
     }
     if(method === 'GET'&&req.path==='/api/user/login-test'){
