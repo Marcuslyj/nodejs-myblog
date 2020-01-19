@@ -3,7 +3,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 // var proxy = require('http-proxy-middleware')
-
+var session = require('express-session')
+var redisStore = require('connect-redis')(session)
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var blogRouter = require('./routes/blog')
@@ -19,6 +20,21 @@ var app = express();
 // Object.keys(proxyTable).forEach(function(key){
 //     app.use(proxy(key,proxyTable[key]));
 // })
+var redisClient = require('./db/redis')
+var sessionStore = new redisStore({
+    client:redisClient
+})
+app.use(session({
+    secret:'justdoit',
+    cookie:{
+        path:'/',
+        httpOnly:true,
+        maxAge:24*60*60*1000
+    },
+    resave:false,
+    saveUninitialized:true,
+    store:sessionStore
+}))
 app.use(logger('dev'));
 
 // 把 post数据挂载到 body上 application/json
