@@ -10,13 +10,13 @@ return result.then(data=>{
     if(data.username||data.id){
         req.session.username = data.username
         req.session.realName = data.realName
-        res.json({
-            result:new SuccessModel()
-        })
+        res.json(
+            new SuccessModel()
+        )
     }else{
-        res.json({
-            result:new ErrorModel('登录失败')
-        })
+        res.json(
+            new ErrorModel('登录失败')
+        )
     }
     
 })
