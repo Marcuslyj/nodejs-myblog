@@ -9,7 +9,7 @@ const login = (username, password) => {
     // password = escape(password)
 console.log(`login-params:`,username,password)
     const sql = `
-        select username, realname from users where username=${username} and password=${password}
+        select username, realname from users where username='${username}' and password='${password}'
     `
     // console.log('sql is', sql)
     return exec(sql).then(rows => {
@@ -26,8 +26,9 @@ const register = (username,password) => {
     // console.log("blogData:", blogData);
     const sql = `insert into users (username,password,realname) values('${username}','${password}','${username}')`;
     return exec(sql).then(insertData => {
+        console.log('register',insertData)
       return {
-        id: insertData.id
+        id: insertData.insertId
       }
     })
   }
