@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "dev": "cross-env NODE_ENV=dev nodemon ./bin/www.js",
+    "prod": "cross-env NODE_ENV=production nodemon ./bin/www.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -12,6 +14,8 @@
     "morgan": "~1.9.1"
   },
   "devDependencies": {
-    "http-proxy-middleware": "^0.20.0"
+    "cross-env": "^6.0.3",
+    "http-proxy-middleware": "^0.20.0",
+    "nodemon": "^2.0.2"
   }
 }
